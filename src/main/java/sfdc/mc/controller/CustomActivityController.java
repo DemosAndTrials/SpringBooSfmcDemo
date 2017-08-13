@@ -2,7 +2,9 @@ package sfdc.mc.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import static java.lang.System.*;
@@ -17,6 +19,12 @@ public class CustomActivityController {
         out.println("************** " + numSteps + " *****************");
         model.addAttribute("numSteps", numSteps);
         return "ca";
+    }
+
+    @RequestMapping(value = "/post", method = RequestMethod.POST, headers = "Accept=application/json")
+    public String post(@RequestBody String json) {
+        out.println("************** " + json + " *****************");
+        return "OK";
     }
 
     @RequestMapping(value = "/save")
