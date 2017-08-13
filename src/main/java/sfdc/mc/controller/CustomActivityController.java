@@ -22,7 +22,6 @@ public class CustomActivityController {
 
         if (logger.isDebugEnabled())
             logger.debug("Number of steps: " + numSteps);
-        logger.info("Number of steps: " + numSteps);
         model.addAttribute("numSteps", numSteps);
         return "ca";
     }
@@ -31,7 +30,6 @@ public class CustomActivityController {
     public ResponseEntity post(@RequestBody String json) {
         if (logger.isDebugEnabled())
             logger.debug("json: " + json);
-        logger.info("post:");
         return new ResponseEntity("OK", HttpStatus.OK);
     }
 
@@ -46,7 +44,6 @@ public class CustomActivityController {
     public String publish() {
         if (logger.isDebugEnabled())
             logger.debug("publish:");
-        logger.info("publish:");
         return "ca";
     }
 
