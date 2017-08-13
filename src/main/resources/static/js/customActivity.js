@@ -17,6 +17,9 @@ define(['postmonger'], function(Postmonger) {
     // get the # of steps
     var numSteps = getUrlParameter('numSteps');
     // do some error checking on the inbound num steps
+    console.log("numSteps: " + numSteps);
+    if(numSteps !=1)
+    	numSteps = 1;
 
     $(window).ready(function() {
         connection.trigger('ready');
@@ -190,6 +193,7 @@ define(['postmonger'], function(Postmonger) {
 
     function save() {
         console.log('*** save ***', inArgPayload['arguments']);
+
         inArgPayload['arguments'].execute.inArguments = []; // remove all the args, only save the last one
 
         // push all of the form names / values onto the args stack
