@@ -27,25 +27,25 @@ public class CustomActivityController {
         return "OK";
     }
 
-    @RequestMapping(value = "/save")
+    @RequestMapping(value = "/save", method = RequestMethod.POST, headers = "Accept=application/json")
     public String save() {
         out.println("*******************************");
         return "ca";
     }
 
-    @RequestMapping(value = "/publish")
+    @RequestMapping(value = "/publish", method = RequestMethod.POST, headers = "Accept=application/json")
     public String publish() {
         out.println("**************save*****************");
         return "ca";
     }
 
-    @RequestMapping(value = "/validate")
+    @RequestMapping(value = "/validate", method = RequestMethod.POST, headers = "Accept=application/json")
     public String validate() {
         out.println("***************validate****************");
         return "ca";
     }
 
-    @RequestMapping(value = "/stop")
+    @RequestMapping(value = "/stop", method = RequestMethod.POST, headers = "Accept=application/json")
     public String stop() {
         out.println("****************stop***************");
         return "ca";
