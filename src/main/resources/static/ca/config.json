@@ -37,7 +37,11 @@
            "url": "https://sfmc-api-demo.herokuapp.com/ca/validate"
        }
    },
-    "wizardSteps": "1",
+   "wizardSteps": [{
+    "label": "Step 1",
+    "key": "step1"
+  }
+   ],
    "edit": {
 		"url": "https://sfmc-api-demo.herokuapp.com/ca",
 		"height": "600",
