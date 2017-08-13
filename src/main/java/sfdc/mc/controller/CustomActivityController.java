@@ -23,12 +23,6 @@ public class CustomActivityController {
         return "ca";
     }
 
-    @RequestMapping(value = "/ixn/activities/generic-activity/index.html")
-    public String fix() {
-
-        return "ca";
-    }
-
     @RequestMapping(value = "/post", method = RequestMethod.POST, headers = "Accept=application/json")
     public ResponseEntity post(@RequestBody String json) {
         out.println("************** " + json + " *****************");

@@ -32,4 +32,11 @@ public class DemoController {
         return "lightning";
     }
 
+    @RequestMapping(value = "/ixn/activities/generic-activity/index.html")
+    public String fix() {
+
+        return "ca";
+    }
+
+
 }
