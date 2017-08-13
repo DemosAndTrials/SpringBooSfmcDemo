@@ -8,6 +8,7 @@ define( function( require ) {
 
     $(window).ready(function() {
         console.log('*** ready ***');
+        console.log(Postmonger);
         connection.trigger('ready');
         connection.trigger('requestTokens');
         connection.trigger('requestEndpoints');
