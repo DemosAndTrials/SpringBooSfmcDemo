@@ -7,6 +7,7 @@ define( function( require ) {
     var endpoints;
 
     $(window).ready(function() {
+        console.log('*** ready ***');
         connection.trigger('ready');
         connection.trigger('requestTokens');
         connection.trigger('requestEndpoints');
@@ -21,6 +22,7 @@ define( function( require ) {
         } else {
             tokens = data;
         }
+        console.log('*** getTokens ***', data);
     });
 
     /**
@@ -45,6 +47,7 @@ define( function( require ) {
         } else {
             endpoints = data;
         }
+        console.log('*** getEndpoints ***', data);
     });
 
     connection.on('requestPayload', function() {
@@ -58,6 +61,7 @@ define( function( require ) {
         payload.flowDisplayName = 'Hello World';
 
         connection.trigger('getPayload', payload);
+        console.log('*** requestPayload ***', payload);
     });
 
     // Journey Builder broadcasts this event to us after this module
@@ -65,6 +69,7 @@ define( function( require ) {
     // consists of the Event Data and passes it to the
     // "config.js.save.uri" as a POST
     connection.on('populateFields', function(payload) {
+        console.log('*** populateFields ***', payload);
     });
 
     // Trigger this method when updating a step. This allows JB to
