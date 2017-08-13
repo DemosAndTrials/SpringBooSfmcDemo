@@ -1,5 +1,7 @@
 package sfdc.mc.controller;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,10 +23,16 @@ public class CustomActivityController {
         return "ca";
     }
 
+    @RequestMapping(value = "/ixn/activities/generic-activity/index.html")
+    public String fix() {
+
+        return "ca";
+    }
+
     @RequestMapping(value = "/post", method = RequestMethod.POST, headers = "Accept=application/json")
-    public String post(@RequestBody String json) {
+    public ResponseEntity post(@RequestBody String json) {
         out.println("************** " + json + " *****************");
-        return "OK";
+        return new ResponseEntity("OK", HttpStatus.OK);
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST, headers = "Accept=application/json")
