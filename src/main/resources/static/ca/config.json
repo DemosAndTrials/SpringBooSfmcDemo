@@ -47,7 +47,7 @@
      }
    ],
    "edit": {
-		"url": "https://sfmc-api-demo.herokuapp.com/ca.html",
+		"url": "https://sfmc-api-demo.herokuapp.com/ca",
 		"height": "600",
 		"width": "800"
 	}

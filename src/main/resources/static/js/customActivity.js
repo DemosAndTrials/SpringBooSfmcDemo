@@ -18,16 +18,13 @@ define(['postmonger'], function(Postmonger) {
     var step = 1;
 
     // get the # of steps
-    var modelSteps = $('#numSteps').val();
-    console.log("modelSteps: " + modelSteps);
-
-    var numSteps = getUrlParameter('numSteps');
+	// get it from hidden element
+    var numSteps = $('#numSteps').val();
+    //var numSteps = getUrlParameter('numSteps');
     // do some error checking on the inbound num steps
     console.log("numSteps: " + numSteps);
-    if(numSteps == "undefined")
-    	numSteps = modelSteps;
-    console.log("numSteps: " + numSteps);
-    
+
+
     $(window).ready(function() {
         console.log("ready +  request Endpoints");
         connection.trigger('ready');
