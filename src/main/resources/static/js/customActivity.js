@@ -18,6 +18,8 @@ define(['postmonger'], function(Postmonger) {
     var step = 1;
 
     // get the # of steps
+    var modelSteps = [[${numSteps}]];
+    console.log("modelSteps: " + modelSteps);
     var numSteps = getUrlParameter('numSteps');
     // do some error checking on the inbound num steps
     console.log("numSteps: " + numSteps);
@@ -25,6 +27,7 @@ define(['postmonger'], function(Postmonger) {
     	numSteps = 1;
 
     $(window).ready(function() {
+        console.log("ready +  request Endpoints");
         connection.trigger('ready');
         connection.trigger('requestEndpoints');
     });
