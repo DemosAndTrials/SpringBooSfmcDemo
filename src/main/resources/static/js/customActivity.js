@@ -18,7 +18,7 @@ define(['postmonger'], function(Postmonger) {
     var step = 1;
 
     // get the # of steps
-    var modelSteps = $('#numSteps').text();
+    var modelSteps = $('#numSteps').val();
     console.log("modelSteps: " + modelSteps);
 
     var numSteps = getUrlParameter('numSteps');
