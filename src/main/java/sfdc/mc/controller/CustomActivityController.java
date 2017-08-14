@@ -18,10 +18,10 @@ public class CustomActivityController {
     public static Logger logger = LoggerFactory.getLogger(CustomActivityController.class);
 
     @RequestMapping(value = "")
-    public String index(@RequestParam(value="numSteps", defaultValue="1") Integer numSteps, Model model) {
+    public String index(@RequestParam(value="numSteps", defaultValue="0") Integer numSteps, Model model) {
 
-        if (logger.isDebugEnabled())
-            logger.debug("Number of steps: " + numSteps);
+        //if (logger.isDebugEnabled())
+        System.out.println("*** Number of steps: " + numSteps);
         model.addAttribute("numSteps", numSteps);
         return "ca";
     }
