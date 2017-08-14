@@ -19,14 +19,14 @@ define(['postmonger'], function(Postmonger) {
 
     // get the # of steps
     /*<![CDATA[*/
-    var modelSteps = [[${numSteps}]];
-    console.log("modelSteps: " + modelSteps);
+    //var modelSteps = [[${numSteps}]];
+    //console.log("modelSteps: " + modelSteps);
     /*]]>*/
     var numSteps = getUrlParameter('numSteps');
     // do some error checking on the inbound num steps
     console.log("numSteps: " + numSteps);
     if(numSteps !=1)
-    	numSteps = 1;
+    	numSteps = 2;
 
     $(window).ready(function() {
         console.log("ready +  request Endpoints");
