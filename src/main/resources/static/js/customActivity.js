@@ -24,9 +24,10 @@ define(['postmonger'], function(Postmonger) {
     var numSteps = getUrlParameter('numSteps');
     // do some error checking on the inbound num steps
     console.log("numSteps: " + numSteps);
-    if(numSteps !=1)
-    	numSteps = 2;
-
+    if(numSteps == "undefined")
+    	numSteps = modelSteps;
+    console.log("numSteps: " + numSteps);
+    
     $(window).ready(function() {
         console.log("ready +  request Endpoints");
         connection.trigger('ready');
