@@ -8,6 +8,7 @@ define(['postmonger'], function(Postmonger) {
     'use strict';
 
     console.log('***' + window.location.href  + '***');
+    console.log('***' + window.location.hostname + '***');
 
     var connection = new Postmonger.Session();
 
