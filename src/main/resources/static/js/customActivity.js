@@ -7,6 +7,8 @@ requirejs.config({
 define(['postmonger'], function(Postmonger) {
     'use strict';
 
+    console.log('***' + window.location.href  + '***');
+
     var connection = new Postmonger.Session();
 
     var tokens;
@@ -27,17 +29,19 @@ define(['postmonger'], function(Postmonger) {
     });
 
     connection.on('clickedNext', function() {
-        console.log("clicked next step: " + step);
         step++;
+        console.log("clicked next step: " + step);
         connection.trigger('nextStep');
     });
 
     connection.on('clickedBack', function() {
         step--;
+        console.log("clicked back: " + step);
         connection.trigger('prevStep');
     });
 
     connection.on('gotoStep', function () {
+        console.log("go to step: " + step);
         gotoStep(step);
         connection.trigger('ready');
     });
@@ -58,7 +62,6 @@ define(['postmonger'], function(Postmonger) {
         if (payload) {
             inArgPayload = payload;
 
-            console.log('*** ROS ***');
             console.log('payload',JSON.stringify(payload));
 
             var jsonPayload = payload['arguments'].execute.inArguments;
