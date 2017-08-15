@@ -67,11 +67,11 @@ public class CustomActivityController {
         return "ca";
     }
 
-    @RequestMapping(value = "/config.json1")
+    @RequestMapping(value = "/config.json")
     public ResponseEntity getConfig() {
 
-        String caName = System.getenv(ConfigJsonConstants.CA_NAME) != null ? System.getenv(ConfigJsonConstants.CA_NAME) : "Custom Activity";
-        String caEditUrl = System.getenv(ConfigJsonConstants.CA_EDIT_URL) != null ? System.getenv(ConfigJsonConstants.CA_EDIT_URL) : "index.html";
+        String caName = System.getenv(ConfigJsonConstants.CA_NAME) != null ? System.getenv(ConfigJsonConstants.CA_NAME) : "Demo Custom Activity";
+        String caEditUrl = System.getenv(ConfigJsonConstants.CA_EDIT_URL) != null ? System.getenv(ConfigJsonConstants.CA_EDIT_URL) : "edit.html";
         String caImage15 = System.getenv(ConfigJsonConstants.CA_IMG_15) != null ? System.getenv(ConfigJsonConstants.CA_IMG_15) : "https://s25.postimg.org/hxtt8fj2n/angry-bird-icon-15.png";
         String caImage40 = System.getenv(ConfigJsonConstants.CA_IMG_40) != null ? System.getenv(ConfigJsonConstants.CA_IMG_40) : "https://s25.postimg.org/u9wplx6xb/angry-bird-icon-40.png";
         String caNumSteps = System.getenv(ConfigJsonConstants.CA_NUM_STEPS) != null ? System.getenv(ConfigJsonConstants.CA_NUM_STEPS) : "1";
