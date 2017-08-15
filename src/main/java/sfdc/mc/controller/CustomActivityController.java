@@ -116,8 +116,8 @@ public class CustomActivityController {
                 .add("wizardSteps", caNumSteps)
                 .add("edit", Json.createObjectBuilder()
                         .add("url", caEditUrl)
-                        .add("height", caEditHeight)
-                        .add("width", caEditWidth))
+                        .add("height",Integer.valueOf(caEditHeight))
+                        .add("width", Integer.valueOf(caEditWidth)))
                 .build();
         String result = value.toString();
         System.out.println("*** config.json: " + result);
