@@ -13,7 +13,7 @@ public class ConfigJsonConstans {
     public static final String CA_EDIT_HEIGHT = "CA_EDIT_HEIGHT";
     public static final String CA_EDIT_WIDTH = "EDIT_WIDTH";
     public static final String ENDPOINT_NAME = "ENDPOINT_NAME";
-    public static final String CA_ENDPOINT_URL = "EXECUTE_ENDPOINT_URL";
+    public static final String CA_ENDPOINT_URL = "CA_ENDPOINT_URL";
     public static final String HEROKU_APP_NAME = "HEROKU_APP_NAME";
     public static final String CA_KEY = "CA_KEY";
 }
