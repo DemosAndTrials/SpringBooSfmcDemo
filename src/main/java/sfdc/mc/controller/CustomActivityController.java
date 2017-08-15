@@ -10,12 +10,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import sfdc.mc.util.ConfigJsonConstans;
+import sfdc.mc.util.ConfigJsonConstants;
 
 import javax.json.Json;
-import javax.json.JsonBuilderFactory;
 import javax.json.JsonObject;
-import java.math.BigDecimal;
 
 @Controller
 @RequestMapping("/ca")
@@ -69,20 +67,20 @@ public class CustomActivityController {
         return "ca";
     }
 
-    @RequestMapping(value = "/config.json")
+    @RequestMapping(value = "/config.json1")
     public ResponseEntity getConfig() {
 
-        String caName = System.getenv(ConfigJsonConstans.CA_NAME) != null ? System.getenv(ConfigJsonConstans.CA_NAME) : "Custom Activity";
-        String caEditUrl = System.getenv(ConfigJsonConstans.CA_EDIT_URL) != null ? System.getenv(ConfigJsonConstans.CA_EDIT_URL) : "index.html";
-        String caImage15 = System.getenv(ConfigJsonConstans.CA_IMG_15) != null ? System.getenv(ConfigJsonConstans.CA_IMG_15) : "https://s25.postimg.org/hxtt8fj2n/angry-bird-icon-15.png";
-        String caImage40 = System.getenv(ConfigJsonConstans.CA_IMG_40) != null ? System.getenv(ConfigJsonConstans.CA_IMG_40) : "https://s25.postimg.org/u9wplx6xb/angry-bird-icon-40.png";
-        String caNumSteps = System.getenv(ConfigJsonConstans.CA_NUM_STEPS) != null ? System.getenv(ConfigJsonConstans.CA_NUM_STEPS) : "1";
-        String caEditHeight = System.getenv(ConfigJsonConstans.CA_EDIT_HEIGHT) != null ? System.getenv(ConfigJsonConstans.CA_EDIT_HEIGHT) : "600";
-        String caEditWidth = System.getenv(ConfigJsonConstans.CA_EDIT_WIDTH) != null ? System.getenv(ConfigJsonConstans.CA_EDIT_WIDTH) : "800";
-        String caEndPointName = System.getenv(ConfigJsonConstans.ENDPOINT_NAME) != null ? System.getenv(ConfigJsonConstans.ENDPOINT_NAME) : "ENDPOINT_NAME";
-        String caEndPointUrl = System.getenv(ConfigJsonConstans.CA_ENDPOINT_URL) != null ? System.getenv(ConfigJsonConstans.CA_ENDPOINT_URL) : "index.html";
-        String caHerokuAppName = System.getenv(ConfigJsonConstans.HEROKU_APP_NAME) != null ? System.getenv(ConfigJsonConstans.HEROKU_APP_NAME) : "HEROKU_APP_NAME";
-        String caKey = System.getenv(ConfigJsonConstans.CA_KEY) != null ? System.getenv(ConfigJsonConstans.CA_KEY) : "123456789";
+        String caName = System.getenv(ConfigJsonConstants.CA_NAME) != null ? System.getenv(ConfigJsonConstants.CA_NAME) : "Custom Activity";
+        String caEditUrl = System.getenv(ConfigJsonConstants.CA_EDIT_URL) != null ? System.getenv(ConfigJsonConstants.CA_EDIT_URL) : "index.html";
+        String caImage15 = System.getenv(ConfigJsonConstants.CA_IMG_15) != null ? System.getenv(ConfigJsonConstants.CA_IMG_15) : "https://s25.postimg.org/hxtt8fj2n/angry-bird-icon-15.png";
+        String caImage40 = System.getenv(ConfigJsonConstants.CA_IMG_40) != null ? System.getenv(ConfigJsonConstants.CA_IMG_40) : "https://s25.postimg.org/u9wplx6xb/angry-bird-icon-40.png";
+        String caNumSteps = System.getenv(ConfigJsonConstants.CA_NUM_STEPS) != null ? System.getenv(ConfigJsonConstants.CA_NUM_STEPS) : "1";
+        String caEditHeight = System.getenv(ConfigJsonConstants.CA_EDIT_HEIGHT) != null ? System.getenv(ConfigJsonConstants.CA_EDIT_HEIGHT) : "600";
+        String caEditWidth = System.getenv(ConfigJsonConstants.CA_EDIT_WIDTH) != null ? System.getenv(ConfigJsonConstants.CA_EDIT_WIDTH) : "800";
+        String caEndPointName = System.getenv(ConfigJsonConstants.ENDPOINT_NAME) != null ? System.getenv(ConfigJsonConstants.ENDPOINT_NAME) : "ENDPOINT_NAME";
+        String caEndPointUrl = System.getenv(ConfigJsonConstants.CA_ENDPOINT_URL) != null ? System.getenv(ConfigJsonConstants.CA_ENDPOINT_URL) : "index.html";
+        String caHerokuAppName = System.getenv(ConfigJsonConstants.HEROKU_APP_NAME) != null ? System.getenv(ConfigJsonConstants.HEROKU_APP_NAME) : "HEROKU_APP_NAME";
+        String caKey = System.getenv(ConfigJsonConstants.CA_KEY) != null ? System.getenv(ConfigJsonConstants.CA_KEY) : "9ccde4db-7cc2-4aa9-9227-5bb10673ac6d";
 
 
         JsonObject value = Json.createObjectBuilder()
@@ -104,16 +102,17 @@ public class CustomActivityController {
                                 .add("verb", "POST")
                                 .add("body", "")
                                 .add("header", "")
+                                .add("format", "json")
                                 .add("useJwt", false)
                                 .add("",10000)))
                 .add("configurationArguments", Json.createObjectBuilder()
                         .add("applicationExtensionKey", caKey)
                         .add("save", Json.createObjectBuilder()
-                                .add("url", "https://{{ENDPOINT_NAME}}.herokuapp.com/save"))
+                                .add("url", "https://sfmc-api-demo.herokuapp.com/save"))
                         .add("publish", Json.createObjectBuilder()
-                                .add("url", "https://{{ENDPOINT_NAME}}.herokuapp.com/publish"))
+                                .add("url", "https://sfmc-api-demo.herokuapp.com/publish"))
                         .add("validate", Json.createObjectBuilder()
-                                .add("url", "https://{{ENDPOINT_NAME}}.herokuapp.com/validate")))
+                                .add("url", "https://sfmc-api-demo.herokuapp.com/validate")))
                 .add("wizardSteps", caNumSteps)
                 .add("edit", Json.createObjectBuilder()
                         .add("url", caEditUrl)

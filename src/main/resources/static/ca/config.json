@@ -16,7 +16,7 @@
    "arguments": {
         "execute": {
             "inArguments": [],               
-            "url": "https://sfmc-api-demo.herokuapp.com/ca/post",
+            "url": "https://sfmc-api-demo.herokuapp.com/ca/execute",
             "verb": "POST",
             "body": "test body",
             "header": "",

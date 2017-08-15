@@ -3,7 +3,7 @@ package sfdc.mc.util;
 /**
  * Constants
  */
-public class ConfigJsonConstans {
+public class ConfigJsonConstants {
 
     public static final String CA_NAME = "CA_NAME";
     public static final String CA_EDIT_URL = "CA_EDIT_URL";
