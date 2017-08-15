@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import sfdc.mc.util.ConfigJsonConstants;
 
 import javax.json.Json;
@@ -22,15 +21,14 @@ public class CustomActivityController {
     public static Logger logger = LoggerFactory.getLogger(CustomActivityController.class);
 
     @RequestMapping(value = "")
-    public String index(@RequestParam(value="numSteps", defaultValue="1") Integer numSteps, Model model) {
+    public String index(Model model) {
 
         //if (logger.isDebugEnabled())
-        System.out.println("*** Number of steps: " + numSteps);
-        model.addAttribute("numSteps", numSteps);
+        String caNumSteps = System.getenv(ConfigJsonConstants.CA_NUM_STEPS) != null ? System.getenv(ConfigJsonConstants.CA_NUM_STEPS) : "1";
+        System.out.println("*** Number of steps: " + caNumSteps);
+        model.addAttribute("numSteps", caNumSteps);
         return "ca";
     }
-
-
 
     @RequestMapping(value = "/execute", method = RequestMethod.POST, headers = "Accept=application/json")
     public ResponseEntity execute(@RequestBody String json) {
