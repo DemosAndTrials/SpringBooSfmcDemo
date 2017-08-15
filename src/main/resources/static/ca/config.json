@@ -1,8 +1,8 @@
 {
   "workflowApiVersion": "1.1",
   "metaData": {
-    "icon": "images/icon.png",
-    "iconSmall": "images/iconSmall.png",
+    "icon": "https://s25.postimg.org/u9wplx6xb/angry-bird-icon-40.png",
+    "iconSmall": "https://s25.postimg.org/hxtt8fj2n/angry-bird-icon-15.png",
     "category": "message",
     "isConfigured": true
   },
@@ -43,7 +43,7 @@
   }
   ],
   "edit": {
-    "url": "https://ros-mc-ca.herokuapp.com/ixn/activities/generic-activity/index.html",
+    "url": "https://sfmc-api-demo.herokuapp.com/ca",
     "height": 600,
     "width": 800
   }
