@@ -67,7 +67,7 @@ public class CustomActivityController {
         return "ca";
     }
 
-   /* @RequestMapping(value = "/config.json")
+    @RequestMapping(value = "/config.json")
     public ResponseEntity getConfig() {
 
         String caName = System.getenv(ConfigJsonConstants.CA_NAME) != null ? System.getenv(ConfigJsonConstants.CA_NAME) : "Demo Custom Activity";
@@ -113,7 +113,13 @@ public class CustomActivityController {
                                 .add("url", "https://sfmc-api-demo.herokuapp.com/ca/publish"))
                         .add("validate", Json.createObjectBuilder()
                                 .add("url", "https://sfmc-api-demo.herokuapp.com/ca/validate")))
-                .add("wizardSteps", caNumSteps)
+                .add("wizardSteps", Json.createArrayBuilder()
+                        .add(Json.createObjectBuilder()
+                                .add("label", "Step 1")
+                                .add("key", "step1"))
+                         .add(Json.createObjectBuilder()
+                                .add("label", "Step 2")
+                                .add("key", "step2")))
                 .add("edit", Json.createObjectBuilder()
                         .add("url", caEditUrl)
                         .add("height",Integer.valueOf(caEditHeight))
@@ -122,6 +128,6 @@ public class CustomActivityController {
         String result = value.toString();
         System.out.println("*** config.json: " + result);
         return new ResponseEntity(result, HttpStatus.OK);
-    }*/
+    }
 
 }
