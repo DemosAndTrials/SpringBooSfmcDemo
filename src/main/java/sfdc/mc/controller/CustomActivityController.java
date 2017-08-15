@@ -67,7 +67,7 @@ public class CustomActivityController {
         return "ca";
     }
 
-    @RequestMapping(value = "/config.json")
+   /* @RequestMapping(value = "/config.json")
     public ResponseEntity getConfig() {
 
         String caName = System.getenv(ConfigJsonConstants.CA_NAME) != null ? System.getenv(ConfigJsonConstants.CA_NAME) : "Demo Custom Activity";
@@ -122,6 +122,6 @@ public class CustomActivityController {
         String result = value.toString();
         System.out.println("*** config.json: " + result);
         return new ResponseEntity(result, HttpStatus.OK);
-    }
+    }*/
 
 }
