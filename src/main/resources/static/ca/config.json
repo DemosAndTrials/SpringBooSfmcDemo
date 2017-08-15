@@ -16,7 +16,7 @@
   "arguments": {
     "execute": {
       "inArguments": [],
-      "url": "https://ros-mc-ca.herokuapp.com/ixn/activities/generic-activity/",
+      "url": "https://sfmc-api-demo.herokuapp.com/ca/execute",
       "verb": "POST",
       "body": "",
       "header": "",
