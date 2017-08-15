@@ -60,8 +60,6 @@
 		</dependency>
 
 
-
-
 		<!-- hot swapping, disable cache for template, enable live reload -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
