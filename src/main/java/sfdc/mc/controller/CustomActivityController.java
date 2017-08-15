@@ -94,7 +94,7 @@ public class CustomActivityController {
                 .add("lang", Json.createObjectBuilder()
                         .add("en-US", Json.createObjectBuilder()
                                 .add("name", caName)
-                                .add("description", "{{ACTIVITY_DESCRIPTION}}")))
+                                .add("description", "caName")))
                 .add("arguments", Json.createObjectBuilder()
                         .add("execute", Json.createObjectBuilder()
                                 .add("inArguments", Json.createArrayBuilder())
