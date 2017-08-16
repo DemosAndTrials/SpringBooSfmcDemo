@@ -7,8 +7,7 @@ requirejs.config({
 define(['postmonger'], function(Postmonger) {
     'use strict';
 
-    console.log('***' + window.location.href  + '***');
-    console.log('***' + window.location.hostname + '***');
+    console.log('*** ' + window.location.href  + ' ***');
 
     var connection = new Postmonger.Session();
 
@@ -18,7 +17,7 @@ define(['postmonger'], function(Postmonger) {
     var step = 1;
 
     // get the # of steps
-	// get it from hidden element
+	// get it from hidden field
     var numSteps = $('#numSteps').val();
     //var numSteps = getUrlParameter('numSteps');
     // do some error checking on the inbound num steps
@@ -26,9 +25,14 @@ define(['postmonger'], function(Postmonger) {
 
 
     $(window).ready(function() {
-        console.log("ready +  request Endpoints");
+        console.log("ready + request Endpoints");
         connection.trigger('ready');
         connection.trigger('requestEndpoints');
+
+       // post({ name: "test" });
+        $("#driver").click(function(event){
+            post({ name: "test" });
+        });
     });
 
     connection.on('clickedNext', function() {
@@ -62,6 +66,7 @@ define(['postmonger'], function(Postmonger) {
     });
 
     connection.on('initActivity', function(payload) {
+        console.log('initActivity');
         if (payload) {
             inArgPayload = payload;
 
@@ -82,7 +87,6 @@ define(['postmonger'], function(Postmonger) {
                     $(selector).val(value);
                 }
             }
-
         }
 
         gotoStep(step);
@@ -194,9 +198,11 @@ define(['postmonger'], function(Postmonger) {
         // inArgPayload['arguments'].execute.inArguments.push({"displayMessage": value});
 
         console.log('Message: ' + value);
-
     }
 
+    //
+    // Save
+    //
     function save() {
         console.log('*** save ***', inArgPayload['arguments']);
 
@@ -217,5 +223,25 @@ define(['postmonger'], function(Postmonger) {
 
         connection.trigger('updateActivity',inArgPayload);
         inArgPayload.metaData.isConfigured = true;
+
+        //$('form#genericActivity').submit(); // post form
+        post(inArgPayload['arguments'].execute.inArguments);
     }
+
+    //
+    // Post
+    //
+    function post(args) {
+        console.log('*** post ***');
+        $.post(
+            "ca/save",
+            args,
+            function(data) {
+                console.log("data: ", data);
+                alert(data);
+                $('#stage').html(data);
+            }
+        );
+    }
+
 });

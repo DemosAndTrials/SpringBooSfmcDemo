@@ -3,7 +3,7 @@ package sfdc.mc.util;
 /**
  * Constants
  */
-public class ConfigJsonConstants {
+public class ConfigConstants {
 
     public static final String CA_NAME = "CA_NAME";
     public static final String CA_EDIT_URL = "CA_EDIT_URL";
@@ -12,8 +12,6 @@ public class ConfigJsonConstants {
     public static final String CA_NUM_STEPS = "CA_NUM_STEPS";
     public static final String CA_EDIT_HEIGHT = "CA_EDIT_HEIGHT";
     public static final String CA_EDIT_WIDTH = "EDIT_WIDTH";
-    public static final String ENDPOINT_NAME = "ENDPOINT_NAME";
     public static final String CA_ENDPOINT_URL = "CA_ENDPOINT_URL";
-    public static final String HEROKU_APP_NAME = "HEROKU_APP_NAME";
     public static final String CA_KEY = "CA_KEY";
 }
