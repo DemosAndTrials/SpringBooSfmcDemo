@@ -38,46 +38,6 @@ define(['postmonger'], function(Postmonger) {
         });
     });
 
-    // Broadcast when the next button has been clicked on the configuration modal.
-    // The activity should respond by calling nextStep (or ready, if validation failed,
-    // and the custom activity wants to prevent navigation to the next step).
-    connection.on('clickedNext', function() {
-        step++;
-        console.log("clicked next step: " + step);
-        connection.trigger('nextStep');
-    });
-
-    // Broadcast when the back button has been clicked on the configuration modal.
-    // The activity should respond by calling prevStep (or ready, if validation failed,
-    // and the custom activity wants to prevent navigation to the previous step).
-    connection.on('clickedBack', function() {
-        step--;
-        console.log("clicked back: " + step);
-        connection.trigger('prevStep');
-    });
-
-    // Broadcast when a new step has been loaded (either via button navigation,
-    // or the user clicking on a step via the wizard). Returns a step payload.
-    // Response: { key: 'step1', label: 'Step 1' }
-    connection.on('gotoStep', function (stepPayload) {
-        console.log("go to step: " + step);
-        console.log("go to step payload: " + stepPayload);
-        gotoStep(step);
-        connection.trigger('ready');
-    });
-
-    // This listens for Journey Builder to send tokens
-    // Parameter is either the tokens data or an object with an
-    // "error" property containing the error message
-    connection.on('getTokens', function( data ) {
-        if( data.error ) {
-            console.error( data.error );
-        } else {
-            tokens = data;
-        }
-        console.log('*** getTokens ***', data);
-    });
-
     // - Broadcast in response to the first ready event called by the custom application.
     //   This is typically done on $(window).ready()
     // - Response (payload): { name: 'MyActivity', metaData: {}, arguments: {}, configurationArguments: {}, outcomes: {} }
@@ -109,9 +69,60 @@ define(['postmonger'], function(Postmonger) {
         }
 
         gotoStep(step);
-
     });
 
+    // - Broadcast in response to a requestTokens event called by the custom application.
+    //   Journey Builder passes back an object containing both a legacy token and a Fuel2 token.
+    // - Response (tokens): { token: <legacy token>, fuel2token: <fuel api token> }
+    // TODO not called
+    connection.on('requestedTokens', function( data ) {
+        if( data.error ) {
+            console.error( data.error );
+        } else {
+            tokens = data;
+        }
+        console.log('*** requestedTokens ***', data);
+    });
+
+    // - Broadcast in response to a requestEndpoints event called by the custom application.
+    //   Journey Builder passes back an object containing a REST host URL.
+    // - Response (endpoints): { restHost: <url> } i.e. "rest.s1.qa1.exacttarget.com"
+    connection.on('requestedEndpoints', function( endpoints ) {
+        if( data.error ) {
+            console.error( data.error );
+        }
+        console.log('*** requestedEndpoints ***', endpoints);
+    });
+
+    // Broadcast when the next button has been clicked on the configuration modal.
+    // The activity should respond by calling nextStep (or ready, if validation failed,
+    // and the custom activity wants to prevent navigation to the next step).
+    connection.on('clickedNext', function() {
+        step++;
+        console.log("clicked next step: " + step);
+        connection.trigger('nextStep');
+    });
+
+    // Broadcast when the back button has been clicked on the configuration modal.
+    // The activity should respond by calling prevStep (or ready, if validation failed,
+    // and the custom activity wants to prevent navigation to the previous step).
+    connection.on('clickedBack', function() {
+        step--;
+        console.log("clicked back: " + step);
+        connection.trigger('prevStep');
+    });
+
+    // Broadcast when a new step has been loaded (either via button navigation,
+    // or the user clicking on a step via the wizard). Returns a step payload.
+    // Response: { key: 'step1', label: 'Step 1' }
+    connection.on('gotoStep', function (stepPayload) {
+        console.log("go to step: " + step);
+        console.log("go to step payload: " + stepPayload);
+        gotoStep(step);
+        connection.trigger('ready');
+    });
+
+    // step
     function gotoStep(step) {
         $('.step').hide();
         var stepStr = '#step' + step;
