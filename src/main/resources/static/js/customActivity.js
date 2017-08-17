@@ -4,6 +4,8 @@ requirejs.config({
     }
 });
 
+// Postmonger Events
+// https://developer.salesforce.com/docs/atlas.en-us.noversion.mc-app-development.meta/mc-app-development/using-postmonger.htm
 define(['postmonger'], function(Postmonger) {
     'use strict';
 
@@ -29,26 +31,37 @@ define(['postmonger'], function(Postmonger) {
         connection.trigger('ready');
         connection.trigger('requestEndpoints');
 
+        // TODO for testing only remove this
        // post({ name: "test" });
         $("#driver").click(function(event){
             post({ name: "test" });
         });
     });
 
+    // Broadcast when the next button has been clicked on the configuration modal.
+    // The activity should respond by calling nextStep (or ready, if validation failed,
+    // and the custom activity wants to prevent navigation to the next step).
     connection.on('clickedNext', function() {
         step++;
         console.log("clicked next step: " + step);
         connection.trigger('nextStep');
     });
 
+    // Broadcast when the back button has been clicked on the configuration modal.
+    // The activity should respond by calling prevStep (or ready, if validation failed,
+    // and the custom activity wants to prevent navigation to the previous step).
     connection.on('clickedBack', function() {
         step--;
         console.log("clicked back: " + step);
         connection.trigger('prevStep');
     });
 
-    connection.on('gotoStep', function () {
+    // Broadcast when a new step has been loaded (either via button navigation,
+    // or the user clicking on a step via the wizard). Returns a step payload.
+    // Response: { key: 'step1', label: 'Step 1' }
+    connection.on('gotoStep', function (stepPayload) {
         console.log("go to step: " + step);
+        console.log("go to step payload: " + stepPayload);
         gotoStep(step);
         connection.trigger('ready');
     });
@@ -65,6 +78,12 @@ define(['postmonger'], function(Postmonger) {
         console.log('*** getTokens ***', data);
     });
 
+    // - Broadcast in response to the first ready event called by the custom application.
+    //   This is typically done on $(window).ready()
+    // - Response (payload): { name: 'MyActivity', metaData: {}, arguments: {}, configurationArguments: {}, outcomes: {} }
+    // - When the activity is dragged from the activity list initially (meaning that it has no existing data),
+    //   the default activity structure is pulled from the custom application's config.json.
+    //   If the activity is a configured activity, the existing saved JSON structure of the activity is passed.
     connection.on('initActivity', function(payload) {
         console.log('initActivity');
         if (payload) {
@@ -144,6 +163,7 @@ define(['postmonger'], function(Postmonger) {
         document.dispatchEvent(event);
     }
 
+    // ??
     connection.on('updateStep', function( data ) {
         // Called if the configuration flow needs to change
         console.log('*** updateStep ***', data);
@@ -161,6 +181,7 @@ define(['postmonger'], function(Postmonger) {
         console.log('*** getEndpoints ***', data);
     });
 
+    // ??
     connection.on('requestPayload', function() {
         var payload = {};
 
