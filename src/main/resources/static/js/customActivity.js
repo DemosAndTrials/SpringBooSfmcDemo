@@ -81,7 +81,7 @@ define(['postmonger'], function(Postmonger) {
         } else {
             tokens = data;
         }
-        console.log('*** requestedTokens ***', data);
+        console.log('*** requestedTokens ***', JSON.stringify(data));
     });
 
     // - Broadcast in response to a requestEndpoints event called by the custom application.
@@ -91,7 +91,7 @@ define(['postmonger'], function(Postmonger) {
         if( data.error ) {
             console.error( data.error );
         }
-        console.log('*** requestedEndpoints ***', endpoints);
+        console.log('*** requestedEndpoints ***', JSON.stringify(endpoints));
     });
 
     // Broadcast when the next button has been clicked on the configuration modal.
