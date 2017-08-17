@@ -87,8 +87,8 @@ define(['postmonger'], function(Postmonger) {
     //   Journey Builder passes back an object containing a REST host URL.
     // - Response (endpoints): { restHost: <url> } i.e. "rest.s1.qa1.exacttarget.com"
     connection.on('requestedEndpoints', function( endpoints ) {
-        if( data.error ) {
-            console.error( data.error );
+        if( endpoints.error ) {
+            console.error( endpoints.error );
         }
         console.log('*** requestedEndpoints ***', JSON.stringify(endpoints));
     });
@@ -116,7 +116,6 @@ define(['postmonger'], function(Postmonger) {
     // Response: { key: 'step1', label: 'Step 1' }
     connection.on('gotoStep', function (stepPayload) {
         console.log("go to step: " + step);
-        console.log("*** " + stepPayload.key + " , " + stepPayload.label);
         console.log("go to step payload: " + JSON.stringify(stepPayload));
         gotoStep(step);
         connection.trigger('ready');
