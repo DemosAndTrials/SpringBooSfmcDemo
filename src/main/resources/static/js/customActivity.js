@@ -116,6 +116,7 @@ define(['postmonger'], function(Postmonger) {
     // Response: { key: 'step1', label: 'Step 1' }
     connection.on('gotoStep', function (stepPayload) {
         console.log("go to step: " + step);
+        console.log("*** " + stepPayload.key + " , " + stepPayload.label);
         console.log("go to step payload: " + JSON.stringify(stepPayload));
         gotoStep(step);
         connection.trigger('ready');
