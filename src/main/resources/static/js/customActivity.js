@@ -29,7 +29,10 @@ define(['postmonger'], function(Postmonger) {
     $(window).ready(function() {
         console.log("ready + request Endpoints");
         connection.trigger('ready');
+
+        // TODO just for testing
         connection.trigger('requestEndpoints');
+        connection.trigger('requestTokens');
 
         // TODO for testing only remove this
        // post({ name: "test" });
@@ -73,7 +76,6 @@ define(['postmonger'], function(Postmonger) {
     // - Broadcast in response to a requestTokens event called by the custom application.
     //   Journey Builder passes back an object containing both a legacy token and a Fuel2 token.
     // - Response (tokens): { token: <legacy token>, fuel2token: <fuel api token> }
-    // TODO not called
     connection.on('requestedTokens', function( data ) {
         if( data.error ) {
             console.error( data.error );
@@ -86,11 +88,13 @@ define(['postmonger'], function(Postmonger) {
     // - Broadcast in response to a requestEndpoints event called by the custom application.
     //   Journey Builder passes back an object containing a REST host URL.
     // - Response (endpoints): { restHost: <url> } i.e. "rest.s1.qa1.exacttarget.com"
-    connection.on('requestedEndpoints', function( endpoints ) {
-        if( endpoints.error ) {
-            console.error( endpoints.error );
+    connection.on('requestedEndpoints', function( data ) {
+        if( data.error ) {
+            console.error( data.error );
+        }else {
+            endpoints = data;
         }
-        console.log('*** requestedEndpoints ***', JSON.stringify(endpoints));
+        console.log('*** requestedEndpoints ***', JSON.stringify(data));
     });
 
     // Broadcast when the next button has been clicked on the configuration modal.
@@ -121,7 +125,7 @@ define(['postmonger'], function(Postmonger) {
         connection.trigger('ready');
     });
 
-    // step
+    // Go to selected step
     function gotoStep(step) {
         $('.step').hide();
         var stepStr = '#step' + step;
@@ -166,18 +170,11 @@ define(['postmonger'], function(Postmonger) {
         }
 
         if (step > numSteps) {
-            console.log('Saving');
             save();
         }
 
         document.dispatchEvent(event);
     }
-
-    // ??
-    connection.on('updateStep', function( data ) {
-        // Called if the configuration flow needs to change
-        console.log('*** updateStep ***', data);
-    });
 
     // This listens for Journey Builder to send endpoints
     // Parameter is either the endpoints data or an object with an
@@ -191,51 +188,11 @@ define(['postmonger'], function(Postmonger) {
         console.log('*** getEndpoints ***', data);
     });
 
-    // ??
-    connection.on('requestPayload', function() {
-        var payload = {};
-
-        payload.options = {
-
-        };
-
-        //TODO: Shouldn't this come from the data?
-        payload.flowDisplayName = 'Custom Activity';
-
-        connection.trigger('getPayload', payload);
-        console.log('*** requestPayload ***', payload);
-    });
-
-    // Journey Builder broadcasts this event to us after this module
-    // sends the "ready" method. JB parses the serialized object which
-    // consists of the Event Data and passes it to the
-    // "config.js.save.uri" as a POST
-    connection.on('populateFields', function(payload) {
-        console.log('*** populateFields ***', payload);
-    });
-
-    function getUrlParameter(name) {
-        name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-        var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-        var results = regex.exec(location.search);
-        return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-    }
-
-    function preparePayload() {
-
-        var value = getMessage();
-
-
-        // inArgPayload['arguments'].execute.inArguments.push({"displayMessage": value});
-
-        console.log('Message: ' + value);
-    }
-
     //
     // Save
     //
     function save() {
-        console.log('*** save ***', inArgPayload['arguments']);
+        console.log('*** saving arguments ***');
 
         inArgPayload['arguments'].execute.inArguments = []; // remove all the args, only save the last one
 
@@ -260,7 +217,7 @@ define(['postmonger'], function(Postmonger) {
     }
 
     //
-    // Post
+    // Post to controller
     //
     function post(args) {
         console.log('*** post ***');
@@ -273,6 +230,14 @@ define(['postmonger'], function(Postmonger) {
                 $('#stage').html(data);
             }
         );
+    }
+
+    // TODO ???
+    function getUrlParameter(name) {
+        name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+        var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+        var results = regex.exec(location.search);
+        return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
     }
 
 });

@@ -147,10 +147,13 @@ public class CustomActivityController {
                          .add(Json.createObjectBuilder()
                                 .add("label", "Step 2")
                                 .add("key", "step2")))
-                .add("edit", Json.createObjectBuilder()
-                        .add("url", caEditUrl)
-                        .add("height",Integer.valueOf(caEditHeight))
-                        .add("width", Integer.valueOf(caEditWidth)))
+                // userInterfaces - Contains endpoints and UI configurations for the user interfaces for the activity
+                // (configuration modal, running mode hover, running mode details modal).
+                .add("userInterfaces", Json.createObjectBuilder()
+                        .add("configModal", Json.createObjectBuilder()
+                                .add("height",Integer.valueOf(caEditHeight))
+                                .add("width",Integer.valueOf(caEditWidth))
+                                .add("url", caEditUrl)))
                 .build();
         String result = value.toString();
         System.out.println("*** config.json: " + result);
