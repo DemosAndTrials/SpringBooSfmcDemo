@@ -4,8 +4,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.InetAddress;
+import java.net.URI;
 import java.net.UnknownHostException;
 import java.util.Calendar;
 
@@ -46,6 +48,12 @@ public class DemoController {
     @RequestMapping(value = "/")
     public String index(Model model) {
         System.out.println("*******************************");
+
+        ServletUriComponentsBuilder builder = ServletUriComponentsBuilder.fromCurrentRequestUri();
+        //builder.scheme("https");
+        //builder.replaceQueryParam("someBoolean", false);
+        URI newUri = builder.build().toUri();
+        model.addAttribute("newUri", newUri);
         try {
             InetAddress ip = InetAddress.getLocalHost();
             System.out.println("*** " + ip + " ***");
