@@ -4,6 +4,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.Calendar;
 
 /**
@@ -38,6 +41,23 @@ public class DemoController {
     public String fix() {
 
         return "ca";
+    }
+
+    @RequestMapping(value = "/")
+    public String index(Model model) {
+        System.out.println("*******************************");
+        try {
+            InetAddress ip = InetAddress.getLocalHost();
+            System.out.println("*** " + ip + " ***");
+            model.addAttribute("localhost", ip);
+            String hostname = ip.getHostName();
+            model.addAttribute("hostname", hostname);
+            System.out.println("*** " + hostname + " ***");
+            System.out.println("*** " + ip.getHostAddress() + " ***");
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+        return "index";
     }
 
 }
